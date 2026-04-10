@@ -11,6 +11,9 @@ const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./src/routes/auth');
 const repoRoutes = require('./src/routes/repos');
+const prRoutes = require('./src/routes/prs');
+const analyzeRoutes = require('./src/routes/analyze');
+const dashboardRoutes = require('./src/routes/dashboard');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +43,9 @@ app.get('/api/health', (req, res) => {
 // ─── Route Mounting ──────────────────────────
 app.use('/api/auth', authRoutes);
 app.use('/api/repos', repoRoutes);
+app.use('/api', prRoutes);
+app.use('/api/analyze-pr', analyzeRoutes);
+app.use('/api/dashboard', dashboardRoutes);
 
 // ─── 404 Handler ─────────────────────────────
 app.use((req, res) => {
@@ -55,7 +61,10 @@ app.use((err, req, res, next) => {
 // ─── Start Server ────────────────────────────
 app.listen(PORT, () => {
   console.log(`\n  ⚡ GitMax API running on http://localhost:${PORT}`);
-  console.log(`  📡 Health check: http://localhost:${PORT}/api/health`);
-  console.log(`  🔑 Auth routes:  /api/auth/github, /api/auth/gitlab`);
-  console.log(`  📦 Repo routes:  /api/repos\n`);
+  console.log(`  📡 Health check:    http://localhost:${PORT}/api/health`);
+  console.log(`  🔑 Auth routes:     /api/auth/github, /api/auth/gitlab`);
+  console.log(`  📦 Repo routes:     /api/repos`);
+  console.log(`  🔀 PR routes:       /api/repos/:owner/:repo/prs, /api/prs/stats`);
+  console.log(`  🧪 Analysis:        /api/analyze-pr`);
+  console.log(`  📊 Dashboard:       /api/dashboard/overview, /ai-agents, /insight-of-day\n`);
 });
