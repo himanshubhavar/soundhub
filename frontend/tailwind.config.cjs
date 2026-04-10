@@ -1,0 +1,76 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  darkMode: "class",
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "tertiary": "#006947",
+        "secondary-fixed": "#e9ddff",
+        "secondary-fixed-dim": "#d0bcff",
+        "surface-container-high": "#e3e9f1",
+        "surface-container-highest": "#dde3eb",
+        "inverse-surface": "#2b3137",
+        "inverse-primary": "#adc6ff",
+        "on-tertiary": "#ffffff",
+        "on-primary": "#ffffff",
+        "on-error-container": "#93000a",
+        "surface-dim": "#d4dbe2",
+        "primary-container": "#2170e4",
+        "surface-variant": "#dde3eb",
+        "primary": "#0058be",
+        "primary-fixed-dim": "#adc6ff",
+        "on-surface": "#161c22",
+        "surface-container-lowest": "#ffffff",
+        "on-primary-fixed-variant": "#004395",
+        "tertiary-container": "#00855b",
+        "surface-bright": "#f6f9ff",
+        "secondary-container": "#8455ef",
+        "tertiary-fixed": "#6ffbbe",
+        "outline-variant": "#c2c6d6",
+        "on-background": "#161c22",
+        "on-primary-container": "#fefcff",
+        "on-secondary-fixed": "#23005c",
+        "on-error": "#ffffff",
+        "secondary": "#6b38d4",
+        "error": "#ba1a1a",
+        "primary-fixed": "#d8e2ff",
+        "surface-tint": "#005ac2",
+        "outline": "#727785",
+        "on-secondary-fixed-variant": "#5516be",
+        "on-secondary-container": "#fffbff",
+        "background": "#f6f9ff",
+        "surface-container": "#e8eef6",
+        "on-surface-variant": "#424754",
+        "error-container": "#ffdad6",
+        "tertiary-fixed-dim": "#4edea3",
+        "on-tertiary-fixed": "#002113",
+        "on-secondary": "#ffffff",
+        "surface-container-low": "#eef4fc",
+        "on-tertiary-container": "#f5fff6",
+        "on-primary-fixed": "#001a42",
+        "inverse-on-surface": "#ebf1f9",
+        "surface": "#f6f9ff",
+        "on-tertiary-fixed-variant": "#005236"
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      },
+      fontFamily: {
+        "headline": ["Inter"],
+        "body": ["Inter"],
+        "label": ["Inter"]
+      }
+    },
+  },
+  plugins: [
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/container-queries'),
+  ],
+}

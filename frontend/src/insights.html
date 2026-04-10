@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RiskPredict AI - Insights</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "on-primary": "#ffffff",
+                "on-secondary-fixed-variant": "#5516be",
+                "on-tertiary-fixed": "#002113",
+                "on-primary-container": "#fefcff",
+                "tertiary": "#006947",
+                "tertiary-container": "#00855b",
+                "on-error-container": "#93000a",
+                "primary-fixed-dim": "#adc6ff",
+                "surface-variant": "#dde3eb",
+                "primary-fixed": "#d8e2ff",
+                "on-primary-fixed": "#001a42",
+                "primary-container": "#2170e4",
+                "surface-tint": "#005ac2",
+                "surface-container": "#e8eef6",
+                "surface-container-low": "#eef4fc",
+                "tertiary-fixed-dim": "#4edea3",
+                "surface": "#f6f9ff",
+                "error-container": "#ffdad6",
+                "inverse-surface": "#2b3137",
+                "surface-dim": "#d4dbe2",
+                "on-error": "#ffffff",
+                "outline-variant": "#c2c6d6",
+                "on-secondary": "#ffffff",
+                "on-tertiary-container": "#f5fff6",
+                "surface-container-lowest": "#ffffff",
+                "on-primary-fixed-variant": "#004395",
+                "surface-bright": "#f6f9ff",
+                "secondary-container": "#8455ef",
+                "secondary-fixed": "#e9ddff",
+                "on-surface": "#161c22",
+                "secondary": "#6b38d4",
+                "secondary-fixed-dim": "#d0bcff",
+                "inverse-primary": "#adc6ff",
+                "inverse-on-surface": "#ebf1f9",
+                "outline": "#727785",
+                "tertiary-fixed": "#6ffbbe",
+                "on-secondary-fixed": "#23005c",
+                "on-secondary-container": "#fffbff",
+                "background": "#f6f9ff",
+                "on-surface-variant": "#424754",
+                "primary": "#0058be",
+                "error": "#ba1a1a",
+                "on-tertiary": "#ffffff",
+                "on-background": "#161c22",
+                "on-tertiary-fixed-variant": "#005236",
+                "surface-container-high": "#e3e9f1",
+                "surface-container-highest": "#dde3eb"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.5rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "fontFamily": {
+                "headline": [
+                        "Inter", "sans-serif"
+                ],
+                "body": [
+                        "Inter", "sans-serif"
+                ],
+                "label": [
+                        "Inter", "sans-serif"
+                ]
+        }
+},
+    },
+  }
+</script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: theme('colors.surface');
+    color: theme('colors.on-surface');
+  }
+  .ghost-border {
+    border: 1px solid theme('colors.outline-variant' / 20%);
+  }
+  .risk-badge-high {
+    background-color: theme('colors.error-container');
+    color: theme('colors.on-error-container');
+    border: 0.5px solid theme('colors.on-error-container' / 50%);
+  }
+  .risk-badge-medium {
+    background-color: rgba(245, 158, 11, 0.15);
+    color: #F59E0B;
+    border: 0.5px solid rgba(245, 158, 11, 0.5);
+  }
+  .risk-badge-low {
+    background-color: theme('colors.tertiary-container');
+    color: theme('colors.on-tertiary-container');
+    border: 0.5px solid theme('colors.on-tertiary-container' / 50%);
+  }
+  .glass-header {
+    background-color: theme('colors.surface-container-lowest' / 80%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: inset 0 0 0 1px theme('colors.surface-container-lowest' / 30%);
+  }
+  .primary-btn {
+    background: linear-gradient(135deg, theme('colors.primary'), theme('colors.primary-container'));
+    color: theme('colors.on-primary');
+    box-shadow: 0 4px 20px theme('colors.primary' / 10%);
+  }
+  .display-lg {
+    letter-spacing: -0.02em;
+  }
+</style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col group/design-root overflow-x-hidden">
+<div class="layout-container flex h-full grow flex-col items-center">
+<div class="w-full max-w-[1200px] flex flex-col flex-1 pb-10">
+<!-- Navigation (Shared Component Style - Adapted for Full Width & Design System) -->
+<header class="flex items-center justify-between whitespace-nowrap px-8 py-5 sticky top-0 z-50 glass-header">
+<div class="flex items-center gap-4 text-on-surface">
+<div class="size-6 text-primary">
+<svg class="w-full h-full" fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.8261 17.4264C16.7203 18.1174 20.2244 18.5217 24 18.5217C27.7756 18.5217 31.2797 18.1174 34.1739 17.4264C36.9144 16.7722 39.9967 15.2331 41.3563 14.1648L24.8486 40.6391C24.4571 41.267 23.5429 41.267 23.1514 40.6391L6.64374 14.1648C8.00331 15.2331 11.0856 16.7722 13.8261 17.4264Z" fill="currentColor"></path>
+<path clip-rule="evenodd" d="M39.998 12.236C39.9944 12.2537 39.9875 12.2845 39.9748 12.3294C39.9436 12.4399 39.8949 12.5741 39.8346 12.7175C39.8168 12.7597 39.7989 12.8007 39.7813 12.8398C38.5103 13.7113 35.9788 14.9393 33.7095 15.4811C30.9875 16.131 27.6413 16.5217 24 16.5217C20.3587 16.5217 17.0125 16.131 14.2905 15.4811C12.0012 14.9346 9.44505 13.6897 8.18538 12.8168C8.17384 12.7925 8.16216 12.767 8.15052 12.7408C8.09919 12.6249 8.05721 12.5114 8.02977 12.411C8.00356 12.3152 8.00039 12.2667 8.00004 12.2612C8.00004 12.261 8 12.2607 8.00004 12.2612C8.00004 12.2359 8.0104 11.9233 8.68485 11.3686C9.34546 10.8254 10.4222 10.2469 11.9291 9.72276C14.9242 8.68098 19.1919 8 24 8C28.8081 8 33.0758 8.68098 36.0709 9.72276C37.5778 10.2469 38.6545 10.8254 39.3151 11.3686C39.9006 11.8501 39.9857 12.1489 39.998 12.236ZM4.95178 15.2312L21.4543 41.6973C22.6288 43.5809 25.3712 43.5809 26.5457 41.6973L43.0534 15.223C43.0709 15.1948 43.0878 15.1662 43.104 15.1371L41.3563 14.1648C43.104 15.1371 43.1038 15.1374 43.104 15.1371L43.1051 15.135L43.1065 15.1325L43.1101 15.1261L43.1199 15.1082C43.1276 15.094 43.1377 15.0754 43.1497 15.0527C43.1738 15.0075 43.2062 14.9455 43.244 14.8701C43.319 14.7208 43.4196 14.511 43.5217 14.2683C43.6901 13.8679 44 13.0689 44 12.2609C44 10.5573 43.003 9.22254 41.8558 8.2791C40.6947 7.32427 39.1354 6.55361 37.385 5.94477C33.8654 4.72057 29.133 4 24 4C18.867 4 14.1346 4.72057 10.615 5.94478C8.86463 6.55361 7.30529 7.32428 6.14419 8.27911C4.99695 9.22255 3.99999 10.5573 3.99999 12.2609C3.99999 13.1275 4.29264 13.9078 4.49321 14.3607C4.60375 14.6102 4.71348 14.8196 4.79687 14.9689C4.83898 15.0444 4.87547 15.1065 4.9035 15.1529C4.91754 15.1762 4.92954 15.1957 4.93916 15.2111L4.94662 15.223L4.95178 15.2312ZM35.9868 18.996L24 38.22L12.0131 18.996C12.4661 19.1391 12.9179 19.2658 13.3617 19.3718C16.4281 20.1039 20.0901 20.5217 24 20.5217C27.9099 20.5217 31.5719 20.1039 34.6383 19.3718C35.082 19.2658 35.5339 19.1391 35.9868 18.996Z" fill="currentColor" fill-rule="evenodd"></path>
+</svg>
+</div>
+<h2 class="text-on-surface text-xl font-bold tracking-tight">RiskPredict AI</h2>
+</div>
+<div class="flex flex-1 justify-end items-center gap-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<div class="bg-surface-variant bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Close-up portrait of a young woman with natural makeup looking slightly off-camera against a neutral background." style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuCX87E0peHN0NyqTYChGJzafL781-mCVLVItfOFyYXSKrye1evSEnFnw2wxt4S21RBqiWdBCJgWNlwaA4-faxAO6fTHQA6khNuKX9JhGWEjMP_HaH5DXHD7g9rQMVbCQJgXp_yAhDQm-gNdNA1K9eGhNMzMHaK5xJL6bZBPgTSDCY53pVTJSzvyDqq-Idgq-akdsU7otcWASFn1zHKmVHADmbNvJ6e-Jay0Ak3JRaMG7N_A6MbbesF9zf_ysSUGpu-LwgDInj3wXmw");'></div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="w-full px-8 pt-8 flex flex-col gap-10">
+<!-- Page Header & Tabs -->
+<div class="flex flex-col gap-8">
+<div class="flex justify-between items-end pl-2">
+<div>
+<h1 class="text-on-surface text-4xl font-bold display-lg mb-2">Insights</h1>
+<p class="text-on-surface-variant text-lg">Platform health and risk analysis for 'core-api'</p>
+</div>
+<button class="primary-btn px-6 py-2.5 rounded-md font-semibold text-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+        Export Report
+      </button>
+</div>
+<!-- Custom Tabs (No Lines) -->
+<div class="flex gap-2 p-1 bg-surface-container-low rounded-xl w-fit">
+<a class="px-5 py-2.5 rounded-lg text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors" href="#">Health Overview</a>
+<a class="px-5 py-2.5 rounded-lg text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors" href="#">Risk Signals</a>
+<a class="px-5 py-2.5 rounded-lg text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors" href="#">Bug Insights</a>
+<a class="px-5 py-2.5 rounded-lg bg-surface-container-lowest text-primary shadow-sm text-sm font-semibold" href="#">Test Coverage</a>
+<a class="px-5 py-2.5 rounded-lg text-on-surface-variant text-sm font-semibold hover:bg-surface-container-high transition-colors" href="#">Deployment Metrics</a>
+</div>
+</div>
+<!-- Active Tab Content: Test Coverage -->
+<div class="flex flex-col gap-8">
+<!-- Key Metrics Row -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase">Overall Coverage</p>
+<span class="material-symbols-outlined text-primary" data-icon="data_usage">data_usage</span>
+</div>
+<p class="text-on-surface text-4xl font-bold display-lg mt-2">92.4%</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-tertiary-container text-[16px]" data-icon="trending_up">trending_up</span>
+<p class="text-tertiary-container text-sm font-semibold">+2.4% vs last week</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase">Files Covered</p>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="description">description</span>
+</div>
+<p class="text-on-surface text-4xl font-bold display-lg mt-2">1,204</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-tertiary-container text-[16px]" data-icon="trending_up">trending_up</span>
+<p class="text-tertiary-container text-sm font-semibold">+15 new files tested</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex flex-col gap-2">
+<div class="flex justify-between items-start">
+<p class="text-on-surface-variant text-sm font-medium tracking-wide uppercase">Critical Paths</p>
+<span class="material-symbols-outlined text-error" data-icon="route">route</span>
+</div>
+<p class="text-on-surface text-4xl font-bold display-lg mt-2">88.0%</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-error text-[16px]" data-icon="trending_down">trending_down</span>
+<p class="text-error text-sm font-semibold">-1.2% regression detected</p>
+</div>
+</div>
+</div>
+<!-- Main Chart Section -->
+<div class="bg-surface-container-lowest rounded-xl p-8 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex flex-col gap-6">
+<div class="flex justify-between items-center">
+<div>
+<h3 class="text-on-surface text-xl font-bold">Coverage Trend Over Time</h3>
+<p class="text-on-surface-variant text-sm mt-1">30-day historical analysis of branch and statement coverage.</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-md text-sm font-medium hover:bg-surface-variant transition-colors">7D</button>
+<button class="px-4 py-2 bg-primary text-on-primary rounded-md text-sm font-medium">30D</button>
+<button class="px-4 py-2 bg-surface-container-low text-on-surface-variant rounded-md text-sm font-medium hover:bg-surface-variant transition-colors">90D</button>
+</div>
+</div>
+<!-- Chart Visualization Area (Simplified SVG representation) -->
+<div class="w-full h-[300px] mt-4 relative bg-surface-container-low/30 rounded-lg p-4 flex flex-col justify-end">
+<!-- Y-axis labels -->
+<div class="absolute left-4 top-4 bottom-8 flex flex-col justify-between text-xs text-on-surface-variant font-medium">
+<span>100%</span>
+<span>90%</span>
+<span>80%</span>
+<span>70%</span>
+</div>
+<!-- Grid lines -->
+<div class="absolute inset-0 top-4 bottom-8 left-12 right-4 flex flex-col justify-between z-0">
+<div class="border-b border-surface-dim/30 w-full"></div>
+<div class="border-b border-surface-dim/30 w-full"></div>
+<div class="border-b border-surface-dim/30 w-full"></div>
+<div class="border-b border-surface-dim/30 w-full"></div>
+</div>
+<!-- The Area Chart -->
+<div class="absolute inset-0 top-4 bottom-8 left-12 right-4 z-10 overflow-hidden">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 1000 250">
+<defs>
+<lineargradient id="coverageGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="theme('colors.primary')" stop-opacity="0.2"></stop>
+<stop offset="100%" stop-color="theme('colors.primary')" stop-opacity="0"></stop>
+</lineargradient>
+</defs>
+<path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,120 L600,110 L700,90 L800,95 L900,50 L1000,40 V250 H0 Z" fill="url(#coverageGradient)"></path>
+<path d="M0,200 L100,180 L200,190 L300,150 L400,160 L500,120 L600,110 L700,90 L800,95 L900,50 L1000,40" fill="none" stroke="theme('colors.primary')" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</div>
+<!-- X-axis labels -->
+<div class="w-full flex justify-between pl-8 pr-2 mt-4 text-xs text-on-surface-variant font-medium z-20">
+<span>Oct 1</span>
+<span>Oct 8</span>
+<span>Oct 15</span>
+<span>Oct 22</span>
+<span>Oct 29</span>
+</div>
+</div>
+</div>
+<!-- Highlighted Problem Areas -->
+<div class="flex flex-col gap-6">
+<h2 class="text-on-surface text-2xl font-bold display-sm pl-2">Highlighted Problem Areas</h2>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex gap-4 items-start hover:bg-surface-container-low transition-colors duration-300">
+<div class="p-3 bg-error-container/30 rounded-lg text-error">
+<span class="material-symbols-outlined" data-icon="warning">warning</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-on-surface font-semibold text-lg">Authentication Module</h4>
+<span class="risk-badge-high px-2 py-1 rounded-md text-xs font-bold uppercase tracking-wider">High Risk</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">The <code class="bg-surface-container px-1 py-0.5 rounded text-secondary font-mono text-xs">auth.service.ts</code> module lacks sufficient unit tests, particularly around the OAuth callback handlers. Coverage dropped below 60%.</p>
+<div class="flex justify-between items-center">
+<span class="text-xs text-on-surface-variant font-medium">Assignee: Unassigned</span>
+<button class="text-primary text-sm font-semibold hover:underline">View File Detail →</button>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-[0_4px_20px_rgba(22,28,34,0.02)] flex gap-4 items-start hover:bg-surface-container-low transition-colors duration-300">
+<div class="p-3 bg-[rgba(245,158,11,0.1)] rounded-lg text-[#F59E0B]">
+<span class="material-symbols-outlined" data-icon="bug_report">bug_report</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start mb-2">
+<h4 class="text-on-surface font-semibold text-lg">Payment Gateway</h4>
+<span class="risk-badge-medium px-2 py-1 rounded-md text-xs font-bold uppercase tracking-wider">Medium Risk</span>
+</div>
+<p class="text-on-surface-variant text-sm mb-4 leading-relaxed">Integration tests are failing intermittently for Stripe webhook processing. This path is marked as critical but lacks reliable test assertions.</p>
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<div class="size-5 rounded-full bg-surface-dim" data-alt="Small circular avatar of a man with short hair smiling" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC14Yz-liMqCQLnXmfghvY2WDUMIpP8DU4scQs7qHGsKNDvEDvZJPZqt-Y2u44sCBXiqn9r9u8YKkQy4kOmsipMLycFSbqaIiNpk_pTFDeS1ayRvz28cEMcgrriJXuvho8MLb-q98lPcDrfhNTE1DnuFyBs8UjjVR-zMMHbzb9x7fnlwKteD2yzUqVpyt36Nt5UPXtHB6BxzK0tLl0zF574j5_I_MoXaVZuagdFlsiXoTm1XOLJqMmdjuHyLgJkQtHp5ANixNASpfs'); background-size: cover;"></div>
+<span class="text-xs text-on-surface-variant font-medium">J. Smith</span>
+</div>
+<button class="text-primary text-sm font-semibold hover:underline">View Pipeline →</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+</div>
+</body></html>
