@@ -1,5 +1,5 @@
 // ──────────────────────────────────────────────
-// GitMax Backend — Express Server Entry Point
+// GitMax Backend hshshyftfswdy
 // ──────────────────────────────────────────────
 require('dotenv').config();
 
